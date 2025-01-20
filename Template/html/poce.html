@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poce-register</title>
+    <link rel="stylesheet" href="/Template/css/poce.css">
+</head>
+<body>
+    <div class="poce_box2">
+        <h1>Авторизация</h1>
+        <p>
+            <input type="text" id="text" name="username" placeholder="Введите Email или номер телефона" />
+        </p>
+        <p> 
+            <input type="password" id="password2" name="password" placeholder="Введите пароль" />
+        </p>
+        <p> 
+            <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Повторите пароль" />
+        </p>
+        <input type="submit" id="Enter" value="Зарегистрироваться" />
+        <p id="error-message" style="color: red; display: none;"></p>
+    </div>
+    <div class="box_box">
+        <a href="/Template/html/index.html"> <img src="/Template/images/pokemoniconicon.jpg" id="poce-icon"> </a></div>
+
+    <script>
+        const registerButton = document.getElementById('Enter');
+
+        registerButton.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('text').value.trim();
+            const password = document.getElementById('password2').value.trim();
+            const passwordConfirm = document.getElementById('passwordConfirm').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            // Валидация
+            if (!username) {
+                errorMessage.textContent = 'Введите Email или номер телефона.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (!/^\S+@\S+\.\S+$/.test(username) && !/^\d{10,15}$/.test(username)) {
+                errorMessage.textContent = 'Введите корректный Email или номер телефона.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (password.length < 6) {
+                errorMessage.textContent = 'Пароль должен быть не менее 6 символов.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                errorMessage.textContent = 'Пароли не совпадают.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            errorMessage.style.display = 'none';
+
+            // Если валидация пройдена, отправить данные на сервер
+            fetch('http://localhost:5000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (response.ok) {
+                        alert('Регистрация успешна!');
+                        window.location.href = '/Template/html/register.html';
+                    } else {
+                        errorMessage.textContent = data.error || 'Ошибка регистрации.';
+                        errorMessage.style.display = 'block';
+                    }
+                })
+                .catch((error) => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

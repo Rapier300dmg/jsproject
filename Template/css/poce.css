@@ -1,0 +1,87 @@
+/* Общий фон */
+body {
+    background-color: orangered;
+}
+
+/* Контейнер формы авторизации */
+.poce_box, .poce_box2 {
+    background-color: rgb(237, 102, 53);
+    width: 500px;
+    height: 350px; /* Увеличена высота, чтобы уместить все поля */
+    position: absolute;
+    top: 50%; /* Центрирование по вертикали */
+    left: 50%; /* Центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* Центрирование */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    color: rgb(213, 213, 104);
+    margin-top: 20px;
+}
+
+/* Поле ввода логина/имени */
+#text {
+    width: 80%;
+    height: 25px;
+    margin: 20px auto 0 auto;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+/* Поле ввода пароля */
+#password, #password2, #passwordConfirm {
+    width: 80%;
+    height: 25px;
+    margin: 20px auto 0 auto;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+/* Кнопка входа/регистрации */
+#Enter {
+    width: 50%;
+    height: 35px;
+    margin: 30px auto 10px auto;
+    display: block;
+    background-color: rgb(213, 213, 104);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#Enter:hover {
+    background-color: rgb(240, 195, 84);
+}
+
+/* Ссылка на регистрацию */
+#register322 {
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Анимация значка */
+#poce-icon {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    animation: bounce 1s infinite;
+    display: block;
+    margin: 20px auto;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
